@@ -11,7 +11,6 @@ import {
 } from "reactstrap";
 import { addItem } from "../actions/itemActions";
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
 
 const ItemModal = () => {
@@ -31,7 +30,6 @@ const ItemModal = () => {
     e.preventDefault();
 
     const newItem = {
-      id: uuidv4(),
       name: name,
     };
 

@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, ListGroup, ListGroupItem, Button } from "reactstrap";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { useSelector, useDispatch } from "react-redux";
-import { bindActionCreators } from "redux";
 import * as actionsCreators from "../actions/itemActions";
+import { bindActionCreators } from "redux";
 
 const ShoppingList = () => {
   const state = useSelector((state) => state);
-  console.log(state);
+  console.log();
   const items = state.item.items;
   const dispatch = useDispatch();
 
@@ -16,19 +16,23 @@ const ShoppingList = () => {
     dispatch
   );
 
+  useEffect(() => {
+    getItems();
+  }, []);
+
   return (
     <Container>
       <ListGroup>
         <TransitionGroup className="shopping-list">
-          {items.map(({ id, name }) => (
-            <CSSTransition key={id} timeout={500} classNames="fade">
+          {items.map(({ name, _id }) => (
+            <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem>
                 <Button
                   className="remove-btn"
                   color="danger"
                   size="sm"
                   onClick={() => {
-                    deleteItem(id);
+                    deleteItem(_id);
                   }}
                 >
                   &times;
